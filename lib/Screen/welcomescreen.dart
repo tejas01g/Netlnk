@@ -1,50 +1,28 @@
 import 'dart:ui';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-// void main() {
-//   runApp(MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Social Media App',
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//         visualDensity: VisualDensity.adaptivePlatformDensity,
-//       ),
-//       home: WelcomeScreen(),
-//     );
-//   }
-// }
-
-class Welcomescreen extends StatelessWidget {
+class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          // Gradient Background
+          // Wallpaper Background
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.purpleAccent,
-                  Colors.deepPurple,
-                  Colors.blueAccent,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+              image: DecorationImage(
+                image: NetworkImage(
+                    'https://images.unsplash.com/photo-1579457870499-e781952098c6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTMxfHxwYXJ0eXxlbnwwfHwwfHx8MA%3D%3D'),
+                fit: BoxFit.cover,
               ),
             ),
           ),
           // Blurry Overlay
           BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+            filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
             child: Container(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withOpacity(0.3),
             ),
           ),
           // Content
@@ -52,30 +30,53 @@ class Welcomescreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // App Logo
-                Container(
-                  height: 100.0,
-                  width: 100.0,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.6),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.group,
-                      size: 50.0,
-                      color: Colors.deepPurple,
+                // App Logo with subtle animation
+                TweenAnimationBuilder(
+                  tween: Tween<double>(begin: 0, end: 1),
+                  duration: Duration(seconds: 1),
+                  builder: (context, double value, child) {
+                    return Opacity(
+                      opacity: value,
+                      child: Transform.scale(
+                        scale: value,
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: 150.0,
+                    width: 150.0,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.6),
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 10.0,
+                          spreadRadius: 1.0,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: CircleAvatar(
+                        //This is a app logo
+                        radius: 80,
+                        backgroundImage: NetworkImage(
+                            'https://plus.unsplash.com/premium_photo-1671580671733-92d038f1ea97?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzN8fHBhcnR5fGVufDB8fDB8fHww'),
+                      ),
                     ),
                   ),
                 ),
-                SizedBox(height: 20.0),
-                // Welcome Text
+                SizedBox(height: 30.0),
+                // Welcome Text with refined style
                 Text(
-                  'Welcome to SocialX',
+                  'Welcome to Netlnk',
                   style: TextStyle(
-                    fontSize: 32.0,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 36.0,
+                    fontWeight: FontWeight.w800,
                     color: Colors.white,
+                    letterSpacing: 1.2,
                     shadows: [
                       Shadow(
                         blurRadius: 10.0,
@@ -86,33 +87,37 @@ class Welcomescreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10.0),
-                // Tagline Text
+                // Tagline Text with refined style
                 Text(
-                  'Connect with your friends and the world around you.',
+                  'Connect with your friends & do party🥳 and the world around you.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 18.0,
                     color: Colors.white70,
+                    letterSpacing: 1.1,
                   ),
                 ),
-                SizedBox(height: 40.0),
-                // Get Started Button
+                SizedBox(height: 50.0),
+                // Get Started Button with modern style
                 ElevatedButton(
                   onPressed: () {
                     // Navigate to the next screen
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurple,
+                    backgroundColor: CupertinoColors.black,
                     padding:
                         EdgeInsets.symmetric(horizontal: 50.0, vertical: 15.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
+                    elevation: 5.0,
+                    shadowColor: Colors.black45,
                   ),
                   child: Text(
-                    'Get Started',
+                    'Let\'s Party',
                     style: TextStyle(
-                      fontSize: 18.0,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
