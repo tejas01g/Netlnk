@@ -109,7 +109,7 @@ class WelcomeScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: CupertinoColors.black,
                     padding:
-                        EdgeInsets.symmetric(horizontal: 50.0, vertical: 15.0),
+                    EdgeInsets.symmetric(horizontal: 50.0, vertical: 15.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
