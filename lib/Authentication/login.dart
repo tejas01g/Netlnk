@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:netlnk/Authentication/forgotpasswordscreen.dart';
 import 'package:netlnk/Authentication/signup.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -202,7 +203,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold),
                           ),
-                          onPressed: () {})
+                          onPressed: () {
+                            Navigator.of(context).push(CupertinoPageRoute(
+                                builder: (context) => ForgotPasswordScreen()));
+                          })
                     ],
                   ),
                 ),
