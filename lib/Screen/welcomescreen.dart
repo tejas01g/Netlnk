@@ -1,9 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:netlnk/Authentication/login.dart';
-
-import '../Authentication/signup.dart';
+import 'package:netlnk/Authentication/signup.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -105,12 +103,13 @@ class WelcomeScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     // Navigate to the next screen
-                    Navigator.of(context).push(CupertinoPageRoute(builder: (context)=> LoginScreen()));
+                    Navigator.of(context).push(CupertinoPageRoute(
+                        builder: (context) => SignupScreen()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: CupertinoColors.black,
                     padding:
-                        EdgeInsets.symmetric(horizontal: 50.0, vertical: 15.0),
+                    EdgeInsets.symmetric(horizontal: 50.0, vertical: 15.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
