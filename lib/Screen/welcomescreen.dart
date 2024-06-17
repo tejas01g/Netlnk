@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:netlnk/Authentication/signup.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -102,6 +103,8 @@ class WelcomeScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     // Navigate to the next screen
+                    Navigator.of(context).push(CupertinoPageRoute(
+                        builder: (context) => SignupScreen()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: CupertinoColors.black,
