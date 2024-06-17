@@ -5,24 +5,6 @@ import 'dart:ui';
 
 import 'package:netlnk/Authentication/login.dart';
 
-// void main() {
-//   runApp(MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Social Media App',
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//         visualDensity: VisualDensity.adaptivePlatformDensity,
-//       ),
-//       home: SignupScreen(),
-//     );
-//   }
-// }
-
 class SignupScreen extends StatefulWidget {
   @override
   _SignupScreenState createState() => _SignupScreenState();
@@ -84,14 +66,14 @@ class _SignupScreenState extends State<SignupScreen>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Lottie Animation
-                  FadeTransition(
-                    opacity: _animation,
-                    child: Container(
-                      height: 200,
-                      width: 200,
-                      child: Lottie.asset('assets/signup_animation.json'),
-                    ),
-                  ),
+                  // FadeTransition(
+                  //   opacity: _animation,
+                  //   child: Container(
+                  //     height: 200,
+                  //     width: 200,
+                  //     child: Lottie.asset('assets/signup_animation.json'),
+                  //   ),
+                  // ),
                   SizedBox(height: 20.0),
                   // App Logo
                   FadeTransition(
