@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:ui';
+
+import 'package:netlnk/Authentication/login.dart';
 
 void main() {
   runApp(MyApp());
@@ -172,6 +175,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                     opacity: _animation,
                     child: TextButton(
                       onPressed: () {
+                        Navigator.of(context).push(CupertinoPageRoute(
+                            builder: (context) => LoginScreen()));
                         // Navigate back to the login screen
                       },
                       child: Text(
