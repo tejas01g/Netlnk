@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "743029425556",
+    "project_id": "netlnk",
+    "storage_bucket": "netlnk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743029425556:android:d98174643ba8b5dc593b81",
+        "android_client_info": {
+          "package_name": "com.netio.netlnk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqGMxFwuKQw8OEU5h5IJNkkmtOomG_Lbg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
