@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:netlnk/Authentication/forgotpasswordscreen.dart';
 import 'package:netlnk/Authentication/signup.dart';
+import 'Controller/auth_controller.dart'; // Update with the correct path to your auth controller
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -11,6 +13,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final AuthController _authController = Get.find<AuthController>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(
                             fontSize: 36,
                             fontWeight: FontWeight.bold,
-                            color: CupertinoColors.white,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -52,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w400,
-                            color: CupertinoColors.systemGrey,
+                            color: Colors.grey,
                           ),
                         ),
                       ),
@@ -113,6 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                         child: TextField(
+                          controller: _emailController,
                           decoration: InputDecoration(
                             labelText: 'Email',
                             border: InputBorder.none,
@@ -136,6 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                         child: TextField(
+                          controller: _passwordController,
                           obscureText: true,
                           decoration: InputDecoration(
                             labelText: 'Password',
@@ -164,7 +172,22 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                         child: CupertinoButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            try {
+                              await _authController.signin(
+                                _emailController.text.trim(),
+                                _passwordController.text.trim(),
+                              );
+                              // Navigate to home screen upon successful login
+                              Get.offAllNamed('/home');
+                            } catch (e) {
+                              Get.snackbar(
+                                'Error',
+                                'Failed to sign in: $e',
+                                snackPosition: SnackPosition.TOP,
+                              );
+                            }
+                          },
                           borderRadius: BorderRadius.circular(25),
                           color: Colors.transparent,
                           child: Text(
@@ -177,11 +200,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Don\'t have an account'),
+                          Text('Don\'t have an account?'),
                           InkWell(
-                            onTap: () => Navigator.of(context).push(
-                                CupertinoPageRoute(
-                                    builder: (context) => SignupScreen())),
+                            onTap: () {
+                              Get.to(() => SignupScreen());
+                            },
                             child: Padding(
                               padding: const EdgeInsets.only(left: 5),
                               child: Text(
@@ -196,17 +219,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                       CupertinoButton(
-                          child: Text(
-                            'Forgot password',
-                            style: TextStyle(
-                                color: Colors.indigo,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).push(CupertinoPageRoute(
-                                builder: (context) => ForgotPasswordScreen()));
-                          })
+                        child: Text(
+                          'Forgot password',
+                          style: TextStyle(
+                              color: Colors.indigo,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        onPressed: () {
+                          Get.to(() => ForgotPasswordScreen());
+                        },
+                      ),
                     ],
                   ),
                 ),

@@ -1,269 +1,226 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'dart:ui';
-
+import 'package:get/get.dart';
 import 'package:netlnk/Authentication/login.dart';
+import '../Authentication/Controller/auth_controller.dart';
+import '../Screen/add_profile_screen.dart';
 
-class SignupScreen extends StatefulWidget {
-  @override
-  _SignupScreenState createState() => _SignupScreenState();
-}
-
-class _SignupScreenState extends State<SignupScreen>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(seconds: 3),
-      vsync: this,
-    );
-
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
-    _controller.forward();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+class SignupScreen extends StatelessWidget {
+  final AuthController _authController = Get.put(AuthController());
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // Gradient Background
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.purpleAccent,
-                  Colors.deepPurple,
-                  Colors.blueAccent,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+      backgroundColor: Colors.black,
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: Stack(
+            children: [
+              // Upper background area with slogan
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                height: MediaQuery.of(context).size.height * 0.4,
+                child: Container(
+                  color: Colors.black,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Text(
+                          'Netlnk',
+                          style: TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Text(
+                          'Netlnk makes communication secure & party',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
-          // Blurry Overlay
-          BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-            child: Container(
-              color: Colors.black.withOpacity(0.1),
-            ),
-          ),
-          // Content
-          Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Lottie Animation
-                  // FadeTransition(
-                  //   opacity: _animation,
-                  //   child: Container(
-                  //     height: 200,
-                  //     width: 200,
-                  //     child: Lottie.asset('assets/signup_animation.json'),
-                  //   ),
-                  // ),
-                  SizedBox(height: 20.0),
-                  // App Logo
-                  FadeTransition(
-                    opacity: _animation,
-                    child: Container(
-                      height: 100.0,
-                      width: 100.0,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.6),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.group_add,
-                          size: 50.0,
-                          color: Colors.deepPurple,
-                        ),
-                      ),
+              // Modal at the bottom for signup form
+              Positioned.fill(
+                top: MediaQuery.of(context).size.height * 0.4,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.8),
+                        spreadRadius: 5,
+                        blurRadius: 15,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 20.0),
-                  // Welcome Text
-                  FadeTransition(
-                    opacity: _animation,
-                    child: Text(
-                      'Join Netlnk',
-                      style: TextStyle(
-                        fontSize: 32.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(
-                            blurRadius: 10.0,
-                            color: Colors.black45,
-                            offset: Offset(2.0, 2.0),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SizedBox(height: 20),
+                        Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10.0),
-                  // Tagline Text
-                  FadeTransition(
-                    opacity: _animation,
-                    child: Text(
-                      'Create an account and connect with friends.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Colors.white70,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 40.0),
-                  // Name TextField
-                  FadeTransition(
-                    opacity: _animation,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white.withOpacity(0.8),
-                          hintText: 'Name',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.0),
+                          textAlign: TextAlign.start,
+                        ),
+                        SizedBox(height: 20),
+                        TextField(
+                          controller: _nameController,
+                          decoration: InputDecoration(
+                            labelText: 'Name',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20.0),
-                  // Email TextField
-                  FadeTransition(
-                    opacity: _animation,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white.withOpacity(0.8),
-                          hintText: 'Email',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.0),
+                        SizedBox(height: 20),
+                        TextField(
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20.0),
-                  // Password TextField
-                  FadeTransition(
-                    opacity: _animation,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                      child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white.withOpacity(0.8),
-                          hintText: 'Password',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.0),
+                        SizedBox(height: 20),
+                        TextField(
+                          controller: _passwordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                           ),
                         ),
-                      ),
+                        SizedBox(height: 20),
+                        Obx(() {
+                          return _authController.isLoading.value
+                              ? Center(
+                            child: CupertinoActivityIndicator(),
+                          )
+                              : Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              gradient: LinearGradient(
+                                colors: [Colors.blue, Colors.indigo],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.8),
+                                  spreadRadius: 3,
+                                  blurRadius: 10,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: CupertinoButton(
+                              onPressed: () async {
+                                // Check if all fields are filled
+                                if (_nameController.text.trim().isEmpty ||
+                                    _emailController.text.trim().isEmpty ||
+                                    _passwordController.text.trim().isEmpty) {
+                                  Get.snackbar(
+                                    'Error',
+                                    'Please fill all fields.',
+                                    snackPosition: SnackPosition.TOP,
+                                    colorText: CupertinoColors.systemIndigo
+                                  );
+                                  return;
+                                }
+
+                                // Call signup method
+                                await _authController.signup(
+                                  _nameController.text.trim(),
+                                  _emailController.text.trim(),
+                                  _passwordController.text.trim(),
+                                );
+
+                                // Check signup success to navigate
+                                if (_authController.user != null) {
+                                  Get.to(() => AddProfileScreen());
+                                }
+                              },
+                              borderRadius: BorderRadius.circular(25),
+                              color: Colors.transparent,
+                              child: Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                        SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Already have an account?'),
+                            InkWell(
+                              onTap: () {
+                                Get.to(() => LoginScreen());
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 5),
+                                child: Text(
+                                  'Log In',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.indigo,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 30.0),
-                  // Signup Button
-                  FadeTransition(
-                    opacity: _animation,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Handle sign up action
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepPurple,
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 50.0, vertical: 15.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                      ),
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20.0),
-                  // Login Button
-                  FadeTransition(
-                    opacity: _animation,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(CupertinoPageRoute(
-                            builder: (context) => LoginScreen()));
-                        // Navigate to the login screen
-                      },
-                      child: Text(
-                        'Already have an account? Log In',
-                        style: TextStyle(
-                          color: Colors.white,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import 'package:flutter/cupertino.dart';
-
-// class SignUpScreen extends StatefulWidget {
-//   const SignUpScreen({super.key});
-
-//   @override
-//   State<SignUpScreen> createState() => _SignUpScreenState();
-// }
-
-// class _SignUpScreenState extends State<SignUpScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Placeholder();
-//   }
-// }
-
-

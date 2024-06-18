@@ -2,8 +2,12 @@
     package="com.netio.netlnk">
 
     <uses-permission android:name="android.permission.INTERNET" />
-        <application
-        android:label="netlnk"
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:label="Netlnk"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
