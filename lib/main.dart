@@ -33,7 +33,8 @@ class Netlnk extends StatelessWidget {
       getPages: [
         GetPage(name: '/', page: () => SignupScreen()), // Example route
         GetPage(name: '/home', page: () => HomePage()), // Define '/home' route
-        GetPage(name: '/login', page: () => LoginScreen()), // Define '/home' route
+        GetPage(
+            name: '/login', page: () => LoginScreen()), // Define '/home' route
         // Add more routes as needed
       ],
       title: 'Netlnk',
