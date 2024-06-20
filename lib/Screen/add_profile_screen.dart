@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../Authentication/Controller/auth_controller.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart'; // For generating unique filenames
+
 class AddProfileScreen extends StatefulWidget {
   @override
   _AddProfileScreenState createState() => _AddProfileScreenState();
@@ -35,7 +36,6 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
       );
     }
   }
-
 
   Future<void> _uploadProfile() async {
     if (_profileImage == null) {
@@ -113,7 +113,6 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
     }
   }
 
-
   Future<bool> _isUsernameTaken(String username) async {
     // Implement logic to check if username is already taken in Firestore
     // Replace with your Firebase Firestore collection reference
@@ -130,7 +129,8 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
     try {
       String uid = _authController.user!.uid;
       String fileName = Uuid().v4(); // Generate a unique filename
-      Reference storageRef = FirebaseStorage.instance.ref().child('profile_images/$uid/$fileName');
+      Reference storageRef =
+          FirebaseStorage.instance.ref().child('profile_images/$uid/$fileName');
 
       // Upload file to Firebase Storage
       UploadTask uploadTask = storageRef.putFile(imageFile);
@@ -169,13 +169,13 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                 child: Center(
                   child: _profileImage == null
                       ? CircleAvatar(
-                    radius: 50,
-                    child: Icon(Icons.camera_alt),
-                  )
+                          radius: 50,
+                          child: Icon(Icons.camera_alt),
+                        )
                       : CircleAvatar(
-                    radius: 50,
-                    backgroundImage: FileImage(_profileImage!),
-                  ),
+                          radius: 50,
+                          backgroundImage: FileImage(_profileImage!),
+                        ),
                 ),
               ),
               SizedBox(height: 20),
