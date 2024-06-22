@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 import '../Authentication/Controller/auth_controller.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,10 +15,11 @@ class HomePage extends StatefulWidget {
 
 bool isHeart = false;
 List<bool> isHeartList = [false, false];
+int _selectedIndex = 0;
+late PageController _pageController;
 
 class _HomePageState extends State<HomePage> {
   final AuthController _authController = Get.find<AuthController>();
-
   Future<void> _handleSignOut() async {
     try {
       await _authController.signout();
@@ -30,12 +34,34 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _pageController = PageController(initialPage: _selectedIndex);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CupertinoColors.white,
       appBar: AppBar(
+        backgroundColor: CupertinoColors.white,
         scrolledUnderElevation: 0.00,
         elevation: 0.00,
-        title: Text('Netlnk'),
+        title: Text(
+          'Netlnk',
+          style: GoogleFonts.sacramento(
+              fontWeight: FontWeight.bold,
+              fontSize: 35,
+              color: CupertinoColors.systemIndigo),
+        ),
         centerTitle: true,
         actions: [
           IconButton(
@@ -44,100 +70,79 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics()),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 80),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                children: [
-                  const CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        'https://images.unsplash.com/photo-1621184455862-c163dfb30e0f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFzaGlvbiUyMGdpcmx8ZW58MHx8MHx8fDA%3D'),
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        children: [],
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: CupertinoColors.systemIndigo,
+            borderRadius: BorderRadius.circular(30),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 20,
+                color: Colors.indigo,
+              )
+            ],
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+              child: GNav(
+                color: CupertinoColors.white,
+                backgroundColor: CupertinoColors.systemIndigo,
+                rippleColor: Colors.grey[300]!,
+                hoverColor: Colors.transparent,
+                gap: 4,
+                activeColor: CupertinoColors.white,
+                iconSize: 24,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                duration: const Duration(milliseconds: 400),
+                tabBackgroundColor: CupertinoColors.tertiaryLabel,
+                tabs: const [
+                  GButton(
+                    icon: Iconsax.home,
+                    text: 'Home',
                   ),
-                  const SizedBox(width: 10),
-                  const Text('Sofia_91'),
-                  Spacer(),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      CupertinoIcons.ellipsis_vertical,
-                      color: CupertinoColors.black,
-                      size: 20,
-                    ),
-                  )
+                  GButton(
+                    icon: Iconsax.search_favorite,
+                    text: 'Search',
+                  ),
+                  GButton(
+                    icon: Iconsax.play,
+                    text: 'Moments',
+                  ),
+                  GButton(
+                    icon: Iconsax.user,
+                    text: 'Profile',
+                  ),
                 ],
+                selectedIndex: _selectedIndex,
+                onTabChange: (index) {
+                  setState(() {
+                    _selectedIndex = index;
+                    _pageController.animateToPage(
+                      index,
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.ease,
+                    );
+                  });
+                },
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
-              child: Text('Hey, Guys Checkout my new COLLECTION!'),
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isHeart = !isHeart;
-                      });
-                    },
-                    icon: Icon(
-                      isHeart
-                          ? CupertinoIcons.heart_fill
-                          : CupertinoIcons.heart,
-                      color: isHeart
-                          ? CupertinoColors.systemPink
-                          : CupertinoColors.black,
-                      size: 20,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      CupertinoIcons.at,
-                      color: CupertinoColors.black,
-                      size: 20,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      CupertinoIcons.arrow_2_squarepath,
-                      color: CupertinoColors.black,
-                      size: 20,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      CupertinoIcons.share,
-                      size: 20,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            _buildPost(),
-            _buildPost(), // Another instance of the post, change the content as needed
-          ],
+          ),
         ),
       ),
+      //   bottomNavigationBar: ,
     );
   }
 
