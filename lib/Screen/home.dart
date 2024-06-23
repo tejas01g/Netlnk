@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:netlnk/Screen/Pages/home_page.dart';
 import 'package:netlnk/Screen/Pages/search.dart';
+import 'package:netlnk/Screen/Pages/FeedScreen.dart';
+import 'package:netlnk/Screen/add_profile_screen.dart';
 import '../Authentication/Controller/auth_controller.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -63,13 +65,13 @@ class _HomePageState extends State<HomePage> {
               fontSize: 35,
               color: CupertinoColors.systemIndigo),
         ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: _handleSignOut,
-            icon: Icon(CupertinoIcons.power),
-          ),
-        ],
+        // centerTitle: true,
+        // actions: [
+        //   IconButton(
+        //     onPressed: _handleSignOut,
+        //     icon: Icon(CupertinoIcons.power),
+        //   ),
+        // ],
       ),
       body: PageView(
         controller: _pageController,
@@ -81,6 +83,8 @@ class _HomePageState extends State<HomePage> {
         children: [
           HomeScreen(), //index 1
           SearchScreens(),
+          FeedScreen(),
+          AddProfileScreen()
         ],
       ),
       bottomNavigationBar: Padding(
