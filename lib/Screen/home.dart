@@ -65,6 +65,9 @@ class _HomePageState extends State<HomePage> {
               fontSize: 35,
               color: CupertinoColors.systemIndigo),
         ),
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.messenger_outline)),
+        ],
         // centerTitle: true,
         // actions: [
         //   IconButton(
@@ -73,6 +76,7 @@ class _HomePageState extends State<HomePage> {
         //   ),
         // ],
       ),
+
       body: PageView(
         controller: _pageController,
         onPageChanged: (index) {

@@ -14,8 +14,9 @@ class _FeedScreenState extends State<FeedScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Feed'),
-      ),
+
+          // ],
+          ),
     );
   }
 }
