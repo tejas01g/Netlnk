@@ -161,13 +161,37 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                       onTap: _pickImage,
                       child: Center(
                         child: _profileImage == null
-                            ? CircleAvatar(
-                                radius: 50,
-                                child: Icon(Icons.camera_alt),
+                            ? Container(
+                                width: 110,
+                                height: 110,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.red,
+                                    width: 4.0,
+                                  ),
+                                ),
+                                child: CircleAvatar(
+                                  radius: 50,
+                                  child: Icon(Icons.camera_alt),
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 66, 64, 64),
+                                ),
                               )
-                            : CircleAvatar(
-                                radius: 50,
-                                backgroundImage: FileImage(_profileImage!),
+                            : Container(
+                                width: 110,
+                                height: 110,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.red,
+                                    width: 4.0,
+                                  ),
+                                ),
+                                child: CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage: FileImage(_profileImage!),
+                                ),
                               ),
                       ),
                     ),

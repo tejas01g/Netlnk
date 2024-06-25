@@ -14,6 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          // backgroundColor: Colors.black,
           // title: Text('Home Screen'),
           ),
       body: const PostCard(),
