@@ -139,12 +139,15 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 9, 9, 9),
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 9, 9, 9),
         title: Text('Add Profile'),
         actions: [
           IconButton(
             onPressed: _uploadProfile,
             icon: Icon(Icons.check),
+            color: Colors.red,
           ),
         ],
       ),
@@ -218,7 +221,8 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                   onPressed: _signOut,
                   child: Text(
                     'Log Out',
-                    style: TextStyle(color: const Color.fromARGB(255, 9, 9, 9)),
+                    style:
+                        TextStyle(color: const Color.fromARGB(255, 209, 3, 3)),
                   ),
                 ),
               ],

@@ -13,10 +13,12 @@ class _FeedScreenState extends State<FeedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      backgroundColor: const Color.fromARGB(255, 9, 9, 9),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.black,
 
-          // ],
-          ),
+      // ],
     );
+    // );
   }
 }

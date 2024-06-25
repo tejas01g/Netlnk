@@ -17,6 +17,7 @@ class _PostCardState extends State<PostCard> {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [
+          //HEADER SECTION
           Container(
             padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 16)
                 .copyWith(right: 0),
@@ -36,29 +37,98 @@ class _PostCardState extends State<PostCard> {
                       children: [
                         Text(
                           'somya_09',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.white),
                         )
                       ],
                     ),
                   ),
                 ),
-                //     IconButton(
-                //       onPressed: () {
-                //         showDialog(context: context, builder: (context) => Dialog(
-                //           child: ListView(
-                //             padding: EdgeInsets.symmetric(
-                //               vertical: 16
-                //             ),
-                //       //       shrinkWrap: true,
-                //       //       children: [
-                //       //         'Delete',
-                //       //   //     ].map(e) =>
-                //       //   //   ),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                              child: ListView(
+                                padding: EdgeInsets.symmetric(vertical: 16),
+                                shrinkWrap: true,
+                                children: [
+                                  'Delete',
+                                ]
+                                    .map(
+                                      (e) => InkWell(
+                                        onTap: () {},
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 12, horizontal: 16),
+                                          child: Text(e),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            ));
+                  },
+                  icon: Icon(Icons.more_vert),
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ),
+          //IMAGE SECTION
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.35,
+            width: double.infinity,
+            child: Image.network(
+                'https://images.unsplash.com/photo-1718964313551-420f92249238?q=80&w=984&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                fit: BoxFit.cover),
+          ),
 
-                //       //   // )),
-                //       // },
-                //       icon: Icon(Icons.more_vert),
-                // ),
+          //LIKED COMMENT SECTION
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.favorite),
+                color: Colors.red,
+              ),
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.comment_outlined,
+                    color: Colors.white,
+                  )),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.send),
+                color: Colors.white,
+              ),
+              Expanded(
+                child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: IconButton(
+                      icon: Icon(Icons.bookmark_border),
+                      color: Colors.white,
+                      onPressed: () {},
+                    )),
+              )
+            ],
+          ),
+
+          //DESCRIPTION AND NUMBER OF COMMENTS
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '1000 likes',
+                  // style: ( color: const Color.fromARGB(255, 234, 10, 10)),
+                ),
+                // )
               ],
             ),
           )

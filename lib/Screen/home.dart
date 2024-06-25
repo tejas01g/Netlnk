@@ -53,7 +53,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CupertinoColors.white,
+      backgroundColor: const Color.fromARGB(255, 1, 1, 1),
+
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 1, 1, 1),
         scrolledUnderElevation: 0.00,
@@ -65,11 +66,12 @@ class _HomePageState extends State<HomePage> {
               fontSize: 35,
               color: const Color.fromARGB(255, 234, 10, 10)),
         ),
+        // the
         actions: [
           IconButton(
               onPressed: () {},
               icon: Icon(
-                Icons.messenger_outline,
+                Icons.storm_outlined,
                 color: Colors.red,
               )),
         ],
