@@ -155,12 +155,23 @@ class _PostCardState extends State<PostCard> {
                         ]),
                   ),
                 ),
-                Container(
+                InkWell(
+                  onTap: () {},
+                  child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 4),
                     child: Text(
                       'View all 200 Comments',
                       style: TextStyle(color: Colors.grey),
-                    )),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Text(
+                    '26/06/2024',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
               ],
             ),
           )
