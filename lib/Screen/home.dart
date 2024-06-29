@@ -53,10 +53,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 1, 1, 1),
+      backgroundColor: Colors.white,
 
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 1, 1, 1),
+        backgroundColor: Colors.white,
         scrolledUnderElevation: 0.00,
         elevation: 0.00,
         title: Text(
@@ -64,16 +64,15 @@ class _HomePageState extends State<HomePage> {
           style: GoogleFonts.sacramento(
               fontWeight: FontWeight.bold,
               fontSize: 35,
-              color: const Color.fromARGB(255, 234, 10, 10)),
+              color: const Color.fromARGB(255, 32, 171, 231)),
         ),
         // the
         actions: [
           IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.storm_outlined,
-                color: Colors.red,
-              )),
+            onPressed: () {},
+            icon: Icon(Icons.storm_outlined,
+                color: const Color.fromARGB(255, 32, 171, 231)),
+          ),
         ],
         // centerTitle: true,
         // actions: [
@@ -102,12 +101,12 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(8.0),
         child: Container(
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 11, 11, 11),
+            color: const Color.fromARGB(255, 157, 208, 230),
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
                 blurRadius: 18,
-                color: const Color.fromARGB(255, 93, 1, 1),
+                color: const Color.fromARGB(255, 44, 72, 161),
               )
             ],
           ),
@@ -116,17 +115,17 @@ class _HomePageState extends State<HomePage> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
               child: GNav(
-                color: const Color.fromARGB(255, 147, 6, 6),
-                backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-                rippleColor: const Color.fromARGB(255, 251, 24, 24)!,
-                hoverColor: const Color.fromARGB(0, 124, 2, 2),
+                color: const Color.fromARGB(255, 30, 6, 153),
+                backgroundColor: const Color.fromARGB(255, 78, 174, 206),
+                rippleColor: const Color.fromARGB(255, 74, 128, 195),
+                hoverColor: const Color.fromARGB(255, 78, 174, 206),
                 gap: 4,
-                activeColor: const Color.fromARGB(255, 235, 4, 4),
+                activeColor: const Color.fromARGB(255, 36, 16, 225),
                 iconSize: 24,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 duration: const Duration(milliseconds: 400),
-                tabBackgroundColor: const Color.fromARGB(74, 141, 8, 8),
+                tabBackgroundColor: const Color.fromARGB(255, 18, 150, 164),
                 tabs: const [
                   GButton(
                     icon: Iconsax.home,
