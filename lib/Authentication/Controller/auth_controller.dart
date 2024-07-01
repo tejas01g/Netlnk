@@ -30,8 +30,9 @@ class AuthController extends GetxController {
         email: email,
         password: password,
       );
-
+      await userCredential.user!.sendEmailVerification();
       User? firebaseUser = userCredential.user;
+
       if (firebaseUser != null) {
         // Create a user document in Firestore
         await _createUserFirestore(
@@ -59,7 +60,12 @@ class AuthController extends GetxController {
       );
     }
   }
-
+  Future<void> sendEmailVerifications() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      await user.sendEmailVerification();
+    }
+  }
   Future<void> signin(String email, String password) async {
     try {
       isLoading(true); // Set loading to true before signin process

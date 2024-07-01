@@ -91,7 +91,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
         'profileImageUrl': profileImageUrl,
       });
 
-      Get.offAllNamed('/home');
+      Get.offAllNamed('/emailVerification');
     } catch (e) {
       print('Error uploading profile details: $e');
       Get.snackbar(
