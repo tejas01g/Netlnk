@@ -139,7 +139,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromRGBO(38, 38, 52, 1.0),
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text('Add Profile'),
