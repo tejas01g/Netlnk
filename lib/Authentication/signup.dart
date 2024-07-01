@@ -11,6 +11,18 @@ class SignupScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  // Email validation using regular expression
+  bool _isValidEmail(String email) {
+    final emailRegex =
+        RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
+  // Password validation (minimum 6 characters)
+  bool _isValidPassword(String password) {
+    return password.length >= 6;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,64 +142,67 @@ class SignupScreen extends StatelessWidget {
                         Obx(() {
                           return _authController.isLoading.value
                               ? Center(
-                            child: CupertinoActivityIndicator(),
-                          )
+                                  child: CupertinoActivityIndicator(),
+                                )
                               : Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              gradient: LinearGradient(
-                                colors: [Colors.blue, Colors.indigo],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.8),
-                                  spreadRadius: 3,
-                                  blurRadius: 10,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: CupertinoButton(
-                              onPressed: () async {
-                                // Check if all fields are filled
-                                if (_nameController.text.trim().isEmpty ||
-                                    _emailController.text.trim().isEmpty ||
-                                    _passwordController.text.trim().isEmpty) {
-                                  Get.snackbar(
-                                    'Error',
-                                    'Please fill all fields.',
-                                    snackPosition: SnackPosition.TOP,
-                                    colorText: CupertinoColors.systemIndigo
-                                  );
-                                  return;
-                                }
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(25),
+                                    gradient: LinearGradient(
+                                      colors: [Colors.blue, Colors.indigo],
+                                      begin: Alignment.centerLeft,
+                                      end: Alignment.centerRight,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.8),
+                                        spreadRadius: 3,
+                                        blurRadius: 10,
+                                        offset: Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: CupertinoButton(
+                                    onPressed: () async {
+                                      // Check if all fields are filled
+                                      if (_nameController.text.trim().isEmpty ||
+                                          _emailController.text
+                                              .trim()
+                                              .isEmpty ||
+                                          _passwordController.text
+                                              .trim()
+                                              .isEmpty) {
+                                        Get.snackbar(
+                                            'Error', 'Please fill all fields.',
+                                            snackPosition: SnackPosition.TOP,
+                                            colorText:
+                                                CupertinoColors.systemIndigo);
+                                        return;
+                                      }
 
-                                // Call signup method
-                                await _authController.signup(
-                                  _nameController.text.trim(),
-                                  _emailController.text.trim(),
-                                  _passwordController.text.trim(),
+                                      // Call signup method
+                                      await _authController.signup(
+                                        _nameController.text.trim(),
+                                        _emailController.text.trim(),
+                                        _passwordController.text.trim(),
+                                      );
+
+                                      // Check signup success to navigate
+                                      if (_authController.user != null) {
+                                        Get.to(() => AddProfileScreen());
+                                      }
+                                    },
+                                    borderRadius: BorderRadius.circular(25),
+                                    color: Colors.transparent,
+                                    child: Text(
+                                      'Sign Up',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ),
                                 );
-
-                                // Check signup success to navigate
-                                if (_authController.user != null) {
-                                  Get.to(() => AddProfileScreen());
-                                }
-                              },
-                              borderRadius: BorderRadius.circular(25),
-                              color: Colors.transparent,
-                              child: Text(
-                                'Sign Up',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
-                          );
                         }),
                         SizedBox(height: 10),
                         Row(
