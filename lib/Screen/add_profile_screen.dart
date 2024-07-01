@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import '../Authentication/Controller/auth_controller.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -141,13 +142,17 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(38, 38, 52, 1.0),
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text('Add Profile'),
+        backgroundColor: const Color.fromRGBO(38, 38, 52, 1.0),
+        title: Text(
+          'Add Profile',
+          style: GoogleFonts.sacramento(
+              fontWeight: FontWeight.bold, fontSize: 25, color: Colors.white),
+        ),
         actions: [
           IconButton(
             onPressed: _uploadProfile,
             icon: Icon(Icons.check),
-            color: Colors.red,
+            color: Colors.white,
           ),
         ],
       ),

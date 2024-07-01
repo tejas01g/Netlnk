@@ -81,11 +81,11 @@ class _HomePageState extends State<HomePage> {
             _selectedIndex = index;
           });
         },
-        children: const [
+        children: [
           HomeScreen(),
           SearchScreen(),
           FeedScreen(),
-          // AddProfileScreen(),
+          AddProfileScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
