@@ -33,36 +33,53 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                 Row(
                   children: [
                     CircleAvatar(
-                      radius: 50,
+                      radius: 40,
                       backgroundColor: Colors.white,
                       backgroundImage: NetworkImage(
                           'https://images.unsplash.com/photo-1630568321786-82abecde2366?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhvdCUyMGdpcmxzfGVufDB8fDB8fHww'),
                     ),
                     Expanded(
                       flex: 1,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      child: Column(
                         children: [
-                          buildStatColumn(20, "posts"),
-                          buildStatColumn(150, "followers"),
-                          buildStatColumn(10, "following"),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              buildStatColumn(20, "posts"),
+                              buildStatColumn(150, "followers"),
+                              buildStatColumn(10, "following"),
+                            ],
+                          ),
+                          SizedBox(height: 1),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              FollowButton(
+                                text: 'Edit Profile',
+                                backgroundColor: Colors.black,
+                                borderColor: Colors.grey,
+                                textColor: Colors.white,
+                                function: () {},
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
-                  ],
-                ),
-                // SizedBox(height: 1),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    FollowButton(
-                      text: 'Edit Profile',
-                      backgroundColor: Colors.black,
-                      borderColor: Colors.grey,
-                      textColor: Colors.white,
-                      function: () {},
-                    ),
+                    // SizedBox(height: 1),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //   children: [
+                    //     FollowButton(
+                    //       text: 'Edit Profile',
+                    //       backgroundColor: Colors.black,
+                    //       borderColor: Colors.grey,
+                    //       textColor: Colors.white,
+                    //       function: () {},
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
                 Container(
