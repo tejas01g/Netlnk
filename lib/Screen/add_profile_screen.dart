@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:netlnk/widget/follow_button.dart';
 
 class AddProfileScreen extends StatefulWidget {
   const AddProfileScreen({super.key});
@@ -15,39 +16,80 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
       backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
-        // backgroundColor: Colors.white,
         title: Text(
           'username',
           style: GoogleFonts.sacramento(
-            // fontWeight: FontWeight.,
             fontSize: 35,
-            color: Colors.white, // Changed color to black for visibility
+            color: Colors.white,
           ),
         ),
       ),
       body: ListView(
         children: [
           Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(children: [
-                Row(children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundColor: Colors.white,
-                    backgroundImage: NetworkImage(
-                        'https://images.unsplash.com/photo-1630568321786-82abecde2366?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhvdCUyMGdpcmxzfGVufDB8fDB8fHww'),
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundColor: Colors.white,
+                      backgroundImage: NetworkImage(
+                          'https://images.unsplash.com/photo-1630568321786-82abecde2366?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhvdCUyMGdpcmxzfGVufDB8fDB8fHww'),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          buildStatColumn(20, "posts"),
+                          buildStatColumn(150, "followers"),
+                          buildStatColumn(10, "following"),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                // SizedBox(height: 1),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FollowButton(
+                      text: 'Edit Profile',
+                      backgroundColor: Colors.black,
+                      borderColor: Colors.grey,
+                      textColor: Colors.white,
+                      function: () {},
+                    ),
+                  ],
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Text(
+                    'username',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      buildStatColumn(20, "posts"),
-                      buildStatColumn(150, "followers"),
-                      buildStatColumn(10, "following"),
-                    ],
-                  )
-                ])
-              ]))
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.only(top: 1),
+                  child: Text(
+                    'Description',
+                    style: TextStyle(
+                      // fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -61,19 +103,408 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
         Text(
           num.toString(),
           style: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
+              fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
         ),
-        Text(
-          label,
-          style: const TextStyle(
-              fontSize: 15, fontWeight: FontWeight.w400, color: Colors.white),
+        Container(
+          margin: const EdgeInsets.only(top: 4),
+          child: Text(
+            label,
+            style: const TextStyle(
+                fontSize: 15, fontWeight: FontWeight.w400, color: Colors.grey),
+          ),
         )
       ],
     );
   }
 }
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:netlnk/widget/follow_button.dart';
+
+// class AddProfileScreen extends StatefulWidget {
+//   const AddProfileScreen({super.key});
+
+//   @override
+//   State<AddProfileScreen> createState() => _AddProfileScreenState();
+// }
+
+// class _AddProfileScreenState extends State<AddProfileScreen> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
+//       appBar: AppBar(
+//         backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
+//         title: Text(
+//           'username',
+//           style: GoogleFonts.sacramento(
+//             fontSize: 35,
+//             color: Colors.white,
+//           ),
+//         ),
+//       ),
+//       body: ListView(
+//         children: [
+//           Padding(
+//             padding: const EdgeInsets.all(16),
+//             child: Column(
+//               children: [
+//                 Row(
+//                   children: [
+//                     CircleAvatar(
+//                       radius: 50,
+//                       backgroundColor: Colors.white,
+//                       backgroundImage: NetworkImage(
+//                           'https://images.unsplash.com/photo-1630568321786-82abecde2366?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhvdCUyMGdpcmxzfGVufDB8fDB8fHww'),
+//                     ),
+//                     Expanded(
+//                       flex: 1,
+//                       child: Row(
+//                         mainAxisSize: MainAxisSize.min,
+//                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                         children: [
+//                           buildStatColumn(20, "posts"),
+//                           buildStatColumn(150, "followers"),
+//                           buildStatColumn(10, "following"),
+//                         ],
+//                       ),
+//                       )
+//                   ],
+//                 ),
+//                 Row(
+//                 SizedBox(height: 1),
+//                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                   children: [
+//                 FollowButton(
+//                   text: 'Edit Profile',
+//                   backgroundColor: Colors.black,
+//                   borderColor: Colors.grey,
+//                   textColor: Colors.white,
+//                   function: () {},
+//                 ),
+//                 ),
+              
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   Column buildStatColumn(int num, String label) {
+//     return Column(
+//       mainAxisSize: MainAxisSize.min,
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: [
+//         Text(
+//           num.toString(),
+//           style: const TextStyle(
+//               fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+//         ),
+//         Container(
+//           margin: const EdgeInsets.only(top: 4),
+//           child: Text(
+//             label,
+//             style: const TextStyle(
+//                 fontSize: 15, fontWeight: FontWeight.w400, color: Colors.grey),
+//           ),
+//         )
+//       ],
+//     );
+//   }
+// }
+
+
+
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:netlnk/widget/follow_button.dart';
+
+// class AddProfileScreen extends StatefulWidget {
+//   const AddProfileScreen({super.key});
+
+//   @override
+//   State<AddProfileScreen> createState() => _AddProfileScreenState();
+// }
+
+// class _AddProfileScreenState extends State<AddProfileScreen> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
+//       appBar: AppBar(
+//         backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
+//         title: Text(
+//           'username',
+//           style: GoogleFonts.sacramento(
+//             fontSize: 35,
+//             color: Colors.white,
+//           ),
+//         ),
+//       ),
+//       body: ListView(
+//         children: [
+//           Padding(
+//             padding: const EdgeInsets.all(16),
+//             child: Column(children: [
+//               Row(
+//                 children: [
+//                   CircleAvatar(
+//                     radius: 50,
+//                     backgroundColor: Colors.white,
+//                     backgroundImage: NetworkImage(
+//                         'https://images.unsplash.com/photo-1630568321786-82abecde2366?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhvdCUyMGdpcmxzfGVufDB8fDB8fHww'),
+//                   ),
+//                   Expanded(
+//                     flex: 1,
+//                     child: Row(
+//                       mainAxisSize: MainAxisSize.min,
+//                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                       children: [
+//                         buildStatColumn(20, "posts"),
+//                         buildStatColumn(150, "followers"),
+//                         buildStatColumn(10, "following"),
+//                       ],
+//                     ),
+//                     Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                       children: [
+//                         FollowButton(
+//                           text: 'Edit Profile',
+//                           backgroundColor: Colors.black,
+//                           borderColor: Colors.grey,
+//                           textColor: Colors.white,
+//                           function: () {},
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//               // SizedBox(height: 16),
+//             ]),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   Column buildStatColumn(int num, String label) {
+//     return Column(
+//       mainAxisSize: MainAxisSize.min,
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: [
+//         Text(
+//           num.toString(),
+//           style: const TextStyle(
+//               fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+//         ),
+//         Container(
+//           margin: const EdgeInsets.only(top: 4),
+//           child: Text(
+//             label,
+//             style: const TextStyle(
+//                 fontSize: 15, fontWeight: FontWeight.w400, color: Colors.grey),
+//           ),
+//         )
+//       ],
+//     );
+//   }
+// }
+
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:netlnk/widget/follow_button.dart';
+
+// class AddProfileScreen extends StatefulWidget {
+//   const AddProfileScreen({super.key});
+
+//   @override
+//   State<AddProfileScreen> createState() => _AddProfileScreenState();
+// }
+
+// class _AddProfileScreenState extends State<AddProfileScreen> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
+//       appBar: AppBar(
+//         backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
+//         title: Text(
+//           'username',
+//           style: GoogleFonts.sacramento(
+//             fontSize: 35,
+//             color: Colors.white,
+//           ),
+//         ),
+//       ),
+//       body: ListView(
+//         children: [
+//           Padding(
+//             padding: const EdgeInsets.all(16),
+//             child: Column(
+//               children: [
+//                 Row(
+//                   children: [
+//                     CircleAvatar(
+//                       radius: 50,
+//                       backgroundColor: Colors.white,
+//                       backgroundImage: NetworkImage(
+//                           'https://images.unsplash.com/photo-1630568321786-82abecde2366?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhvdCUyMGdpcmxzfGVufDB8fDB8fHww'),
+//                     ),
+//                     Expanded(
+//                       flex: 1,
+//                       child: Row(
+//                         mainAxisSize: MainAxisSize.min,
+//                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                         children: [
+//                           buildStatColumn(20, "posts"),
+//                           buildStatColumn(150, "followers"),
+//                           buildStatColumn(10, "following"),
+//                         ],
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//                 SizedBox(height: 16),
+//                 FollowButton(text: 'Edit Profile',),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   Column buildStatColumn(int num, String label) {
+//     return Column(
+//       mainAxisSize: MainAxisSize.min,
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: [
+//         Text(
+//           num.toString(),
+//           style: const TextStyle(
+//               fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+//         ),
+//         Container(
+//           margin: const EdgeInsets.only(top: 4),
+//           child: Text(
+//             label,
+//             style: const TextStyle(
+//                 fontSize: 15, fontWeight: FontWeight.w400, color: Colors.grey),
+//           ),
+//         )
+//       ],
+//     );
+//   }
+// }
+
+
+
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:netlnk/widget/follow_button.dart';
+
+// class AddProfileScreen extends StatefulWidget {
+//   const AddProfileScreen({super.key});
+
+//   @override
+//   State<AddProfileScreen> createState() => _AddProfileScreenState();
+// }
+
+// class _AddProfileScreenState extends State<AddProfileScreen> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
+//       appBar: AppBar(
+//         backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
+//         // backgroundColor: Colors.white,
+//         title: Text(
+//           'username',
+//           style: GoogleFonts.sacramento(
+//             // fontWeight: FontWeight.,
+//             fontSize: 35,
+//             color: Colors.white, // Changed color to black for visibility
+//           ),
+//         ),
+//       ),
+//       body: ListView(
+//         children: [
+//           Padding(
+//               padding: const EdgeInsets.all(16),
+//               child: Column(
+//                 children: [
+//                   Row(
+//                     children: [
+//                       CircleAvatar(
+//                         radius: 50,
+//                         backgroundColor: Colors.white,
+//                         backgroundImage: NetworkImage(
+//                             'https://images.unsplash.com/photo-1630568321786-82abecde2366?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhvdCUyMGdpcmxzfGVufDB8fDB8fHww'),
+//                       ),
+//                       Expanded(
+//                         flex: 1,
+//                         child: Row(
+//                           mainAxisSize: MainAxisSize.min,
+//                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                           children: [
+//                             buildStatColumn(20, "posts"),
+//                             buildStatColumn(150, "followers"),
+//                             buildStatColumn(10, "following"),
+//                           ],
+//                         ),
+//                       ),
+                  
+//                       Row(
+//                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                         children: [
+//                           FollowButton(text: 'Edit Profile'),
+//                     ],
+                    
+//                   ),
+//                 ],
+//               ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   Column buildStatColumn(int num, String label) {
+//     return Column(
+//       mainAxisSize: MainAxisSize.min,
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: [
+//         Text(
+//           num.toString(),
+//           style: const TextStyle(
+//               fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+//         ),
+//         Container(
+//           margin: const EdgeInsets.only(top: 4),
+//           child: Text(
+//             label,
+//             style: const TextStyle(
+//                 fontSize: 15, fontWeight: FontWeight.w400, color: Colors.grey),
+//           ),
+//         )
+//       ],
+//     );
+//   }
+// }
 
 // import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';

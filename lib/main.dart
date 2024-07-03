@@ -7,7 +7,6 @@ import 'package:netlnk/Authentication/login.dart';
 import 'package:netlnk/Authentication/signup.dart';
 import 'package:netlnk/Screen/home.dart';
 import 'package:netlnk/Screen/welcomescreen.dart';
-
 import 'Authentication/Controller/auth_controller.dart';
 import 'Authentication/Controller/user_controiler.dart';
 import 'Authentication/email_verification_page.dart';
@@ -18,7 +17,6 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   // Initialize AuthController and bind it to GetX dependency management
   Get.put(AuthController());
   // Initialize AuthController and UserController
@@ -37,11 +35,13 @@ class Netlnk extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       getPages: [
         GetPage(name: '/', page: () => SignupScreen()), // Example route
-        GetPage(name: '/home', page: () => HomePage()),// Define '/home' route
+        GetPage(name: '/home', page: () => HomePage()), // Define '/home' route
         GetPage(
             name: '/login', page: () => LoginScreen()), // Define '/home' route
         // Add more routes as needed
-        GetPage(name: '/emailVerification', page: () => EmailVerificationPage(email: user?['email'] ?? '' )),
+        GetPage(
+            name: '/emailVerification',
+            page: () => EmailVerificationPage(email: user?['email'] ?? '')),
       ],
       title: 'Netlnk',
       theme: ThemeData(
