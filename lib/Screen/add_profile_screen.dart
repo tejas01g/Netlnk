@@ -3,13 +3,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:netlnk/widget/follow_button.dart';
 
 class AddProfileScreen extends StatefulWidget {
-  const AddProfileScreen({super.key});
+  final String uid;
+  const AddProfileScreen({Key? key, required this.uid}) : super(key: key);
 
   @override
   State<AddProfileScreen> createState() => _AddProfileScreenState();
 }
 
 class _AddProfileScreenState extends State<AddProfileScreen> {
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,10 +108,11 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                       color: Colors.white,
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
+          Divider()
         ],
       ),
     );

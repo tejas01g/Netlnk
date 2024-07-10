@@ -189,7 +189,9 @@ class SignupScreen extends StatelessWidget {
 
                                       // Check signup success to navigate
                                       if (_authController.user != null) {
-                                        Get.to(() => AddProfileScreen());
+                                        Get.to(() => AddProfileScreen(
+                                              uid: '',
+                                            ));
                                       }
                                     },
                                     borderRadius: BorderRadius.circular(25),

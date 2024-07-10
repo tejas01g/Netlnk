@@ -6,6 +6,8 @@ import 'package:netlnk/Screen/Pages/home_page.dart';
 import 'package:netlnk/Screen/Pages/search.dart';
 import 'package:netlnk/Screen/Pages/FeedScreen.dart';
 import 'package:netlnk/Screen/add_profile_screen.dart';
+import 'package:netlnk/widget/add_post_screen-ui.dart';
+import 'package:netlnk/widget/notification_screen.dart';
 import '../Authentication/Controller/auth_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -83,8 +85,11 @@ class _HomePageState extends State<HomePage> {
         children: [
           HomeScreen(),
           SearchScreen(),
-          FeedScreen(),
-          AddProfileScreen(),
+          AddPostScreen(),
+          // NotificationScreen(),
+          AddProfileScreen(
+            uid: '',
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -115,12 +120,17 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddPostScreen()),
+          );
           // Handle button press
         },
         child: const Icon(Iconsax.add),
         backgroundColor: Colors.blue,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
     );
   }
 }
