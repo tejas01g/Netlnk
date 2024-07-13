@@ -1,14 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:netlnk/Authentication/login.dart';
 import 'package:netlnk/Screen/Pages/home_page.dart';
 import 'package:netlnk/Screen/Pages/search.dart';
-import 'package:netlnk/Screen/Pages/FeedScreen.dart';
+// import 'package:netlnk/Screen/Pages/FeedScreen.dart';
 import 'package:netlnk/Screen/add_profile_screen.dart';
 import 'package:netlnk/widget/add_post_screen-ui.dart';
 import 'package:netlnk/widget/notification_screen.dart';
 import '../Authentication/Controller/auth_controller.dart';
+import 'Pages/message.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -69,9 +72,23 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.storm_outlined,
+            onPressed: () {
+              Navigator.of(context).push(CupertinoPageRoute(
+                builder: (context) => Message(),
+              ));
+            },
+            icon: const Icon(CupertinoIcons.bolt,
                 color: Color.fromARGB(255, 32, 171, 231)),
+          ),
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () async {
+              await _handleSignOut();
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => LoginScreen()),
+              );
+              // await FirebaseAuth.instance.signOut();
+            },
           ),
         ],
       ),
@@ -85,8 +102,8 @@ class _HomePageState extends State<HomePage> {
         children: [
           HomeScreen(),
           SearchScreen(),
-          AddPostScreen(),
-          // NotificationScreen(),
+          // AddPostScreen(),
+          NotificationScreen(),
           AddProfileScreen(
             uid: '',
           ),
@@ -104,6 +121,14 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Iconsax.search_normal),
             label: 'Search',
           ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(
+          //     Iconsax.add_circle,
+          //     size: 35,
+          //     // color: Colors.blue,
+          //   ),
+          //   label: 'Post',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Iconsax.notification),
             label: 'Notifications',

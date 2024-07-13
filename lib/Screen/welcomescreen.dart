@@ -109,7 +109,7 @@ class WelcomeScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: CupertinoColors.black,
                     padding:
-                    EdgeInsets.symmetric(horizontal: 50.0, vertical: 15.0),
+                        EdgeInsets.symmetric(horizontal: 50.0, vertical: 15.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
@@ -117,7 +117,7 @@ class WelcomeScreen extends StatelessWidget {
                     shadowColor: Colors.black45,
                   ),
                   child: Text(
-                    'Let\'s Party',
+                    'Get Started',
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,

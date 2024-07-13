@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:netlnk/widget/follow_button.dart';
 
@@ -23,8 +24,8 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
         backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
         title: Text(
           'username',
-          style: GoogleFonts.sacramento(
-            fontSize: 35,
+          style: GoogleFonts.redHatDisplay(
+            fontSize: 25,
             color: Colors.white,
           ),
         ),
@@ -43,6 +44,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                       backgroundImage: NetworkImage(
                           'https://images.unsplash.com/photo-1630568321786-82abecde2366?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhvdCUyMGdpcmxzfGVufDB8fDB8fHww'),
                     ),
+
                     Expanded(
                       flex: 1,
                       child: Column(

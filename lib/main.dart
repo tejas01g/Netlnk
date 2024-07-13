@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:netlnk/Authentication/login.dart';
 import 'package:netlnk/Authentication/signup.dart';
+import 'package:netlnk/Screen/Pages/message.dart';
 import 'package:netlnk/Screen/home.dart';
 import 'package:netlnk/Screen/welcomescreen.dart';
 import 'Authentication/Controller/auth_controller.dart';
@@ -42,6 +43,7 @@ class Netlnk extends StatelessWidget {
         GetPage(
             name: '/emailVerification',
             page: () => EmailVerificationPage(email: user?['email'] ?? '')),
+        GetPage(name: '/message', page: () => Message()),
       ],
       title: 'Netlnk',
       theme: ThemeData(
