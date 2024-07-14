@@ -1,6 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:netlnk/Screen/EditProfile.dart';
+import 'package:netlnk/utils/util.dart';
 import 'package:netlnk/widget/follow_button.dart';
 
 class AddProfileScreen extends StatefulWidget {
@@ -12,18 +18,39 @@ class AddProfileScreen extends StatefulWidget {
 }
 
 class _AddProfileScreenState extends State<AddProfileScreen> {
+  Map<String, dynamic>? userData;
+
+  @override
   void initState() {
     super.initState();
+    getData();
+  }
+
+  getData() async {
+    try {
+      DocumentSnapshot snap = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .get();
+      setState(() {
+        userData = snap.data() as Map<String, dynamic>?;
+      });
+    } catch (e) {
+      showSnackBar(
+        context as String,
+        e.toString() as BuildContext,
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
+      backgroundColor: const Color.fromRGBO(38, 38, 52, 1.0),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
+        backgroundColor: const Color.fromRGBO(38, 38, 52, 1.0),
         title: Text(
-          'username',
+          userData?['username'] ?? 'Loading...',
           style: GoogleFonts.redHatDisplay(
             fontSize: 25,
             color: Colors.white,
@@ -41,10 +68,10 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                     CircleAvatar(
                       radius: 40,
                       backgroundColor: Colors.white,
-                      backgroundImage: NetworkImage(
-                          'https://images.unsplash.com/photo-1630568321786-82abecde2366?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhvdCUyMGdpcmxzfGVufDB8fDB8fHww'),
+                      backgroundImage: CachedNetworkImageProvider(
+                          userData?['profileImageUrl'] ??
+                              'https://via.placeholder.com/150'),
                     ),
-
                     Expanded(
                       flex: 1,
                       child: Column(
@@ -58,7 +85,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                               buildStatColumn(10, "following"),
                             ],
                           ),
-                          SizedBox(height: 1),
+                          const SizedBox(height: 1),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -67,34 +94,25 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                                 backgroundColor: Colors.black,
                                 borderColor: Colors.grey,
                                 textColor: Colors.white,
-                                function: () {},
+                                function: () {
+                                  Navigator.of(context).push(CupertinoPageRoute(
+                                    builder: (context) => Editprofile(),
+                                  ));
+                                },
                               ),
                             ],
                           ),
                         ],
                       ),
                     ),
-                    // SizedBox(height: 1),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //   children: [
-                    //     FollowButton(
-                    //       text: 'Edit Profile',
-                    //       backgroundColor: Colors.black,
-                    //       borderColor: Colors.grey,
-                    //       textColor: Colors.white,
-                    //       function: () {},
-                    //     ),
-                    //   ],
-                    // ),
                   ],
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.only(top: 15),
                   child: Text(
-                    'username',
-                    style: TextStyle(
+                    userData?['username'] ?? 'username',
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
@@ -104,9 +122,8 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.only(top: 1),
                   child: Text(
-                    'Description',
-                    style: TextStyle(
-                      // fontWeight: FontWeight.bold,
+                    userData?['description'] ?? 'Description',
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                   ),
@@ -114,7 +131,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
               ],
             ),
           ),
-          Divider()
+          const Divider(),
         ],
       ),
     );
@@ -137,11 +154,177 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
             style: const TextStyle(
                 fontSize: 15, fontWeight: FontWeight.w400, color: Colors.grey),
           ),
-        )
+        ),
       ],
     );
   }
 }
+
+
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:flutter/material.dart';
+// // import 'package:get/get.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// import 'package:netlnk/utils/util.dart';
+// import 'package:netlnk/widget/follow_button.dart';
+
+// class AddProfileScreen extends StatefulWidget {
+//   final String uid;
+//   const AddProfileScreen({Key? key, required this.uid}) : super(key: key);
+
+//   @override
+//   State<AddProfileScreen> createState() => _AddProfileScreenState();
+// }
+
+// class _AddProfileScreenState extends State<AddProfileScreen> {
+//   void initState() {
+//     super.initState();
+//     getData();
+//   }
+
+//   getData() async {
+//     try {
+//       DocumentSnapshot snap = await FirebaseFirestore.instance
+//           .collection('users')
+//           .doc(widget.uid)
+//           .get();
+//       userData = snap.data()!;
+//       setState(() {});
+//     } catch (e) {
+//       showSnackBar(
+//         context,
+//         e.toString(),
+//       );
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
+//       appBar: AppBar(
+//         backgroundColor: Color.fromRGBO(38, 38, 52, 1.0),
+//         title: Text(
+//           userdata['username'],
+//           style: GoogleFonts.redHatDisplay(
+//             fontSize: 25,
+//             color: Colors.white,
+//           ),
+//         ),
+//       ),
+//       body: ListView(
+//         children: [
+//           Padding(
+//             padding: const EdgeInsets.all(16),
+//             child: Column(
+//               children: [
+//                 Row(
+//                   children: [
+//                     CircleAvatar(
+//                       radius: 40,
+//                       backgroundColor: Colors.white,
+//                       backgroundImage: NetworkImage(
+//                           'https://images.unsplash.com/photo-1630568321786-82abecde2366?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGhvdCUyMGdpcmxzfGVufDB8fDB8fHww'),
+//                     ),
+
+//                     Expanded(
+//                       flex: 1,
+//                       child: Column(
+//                         children: [
+//                           Row(
+//                             mainAxisSize: MainAxisSize.max,
+//                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                             children: [
+//                               buildStatColumn(20, "posts"),
+//                               buildStatColumn(150, "followers"),
+//                               buildStatColumn(10, "following"),
+//                             ],
+//                           ),
+//                           SizedBox(height: 1),
+//                           Row(
+//                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                             children: [
+//                               FollowButton(
+//                                 text: 'Edit Profile',
+//                                 backgroundColor: Colors.black,
+//                                 borderColor: Colors.grey,
+//                                 textColor: Colors.white,
+//                                 function: () {},
+//                               ),
+//                             ],
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                     // SizedBox(height: 1),
+//                     // Row(
+//                     //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                     //   children: [
+//                     //     FollowButton(
+//                     //       text: 'Edit Profile',
+//                     //       backgroundColor: Colors.black,
+//                     //       borderColor: Colors.grey,
+//                     //       textColor: Colors.white,
+//                     //       function: () {},
+//                     //     ),
+//                     //   ],
+//                     // ),
+//                   ],
+//                 ),
+//                 Container(
+//                   alignment: Alignment.centerLeft,
+//                   padding: const EdgeInsets.only(top: 15),
+//                   child: Text(
+//                     'username',
+//                     style: TextStyle(
+//                       fontWeight: FontWeight.bold,
+//                       color: Colors.white,
+//                     ),
+//                   ),
+//                 ),
+//                 Container(
+//                   alignment: Alignment.centerLeft,
+//                   padding: const EdgeInsets.only(top: 1),
+//                   child: Text(
+//                     'Description',
+//                     style: TextStyle(
+//                       // fontWeight: FontWeight.bold,
+//                       color: Colors.white,
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//           Divider()
+//         ],
+//       ),
+//     );
+//   }
+
+//   Column buildStatColumn(int num, String label) {
+//     return Column(
+//       mainAxisSize: MainAxisSize.min,
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: [
+//         Text(
+//           num.toString(),
+//           style: const TextStyle(
+//               fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+//         ),
+//         Container(
+//           margin: const EdgeInsets.only(top: 4),
+//           child: Text(
+//             label,
+//             style: const TextStyle(
+//                 fontSize: 15, fontWeight: FontWeight.w400, color: Colors.grey),
+//           ),
+//         )
+//       ],
+//     );
+//   }
+// }
 
 
 
